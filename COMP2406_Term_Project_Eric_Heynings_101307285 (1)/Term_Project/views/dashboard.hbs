@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{title}}</title>
+  <!-- load Poppins font -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/template.css">
+</head>
+<body>
+  <div class="header">Daily Task Tracker</div>
+  <div class="navbar">
+      <a href="/landing">Home</a>
+      <a href="/login">Login</a>
+      <a href="/register">Register</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/admin">Admin</a>
+  </div>
+  <div id="weather"></div>
+  <div class="content">
+    <div class="dashboard-header">
+      <h2>Welcome, {{user.userid}}!</h2>
+      <div class="points-container">
+        <div class="points-display">
+          Your Points: {{points}} / 15
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width:{{progress}}%;"></div>
+        </div>
+      </div>
+    </div>
+    <h3>Your Tasks for Today</h3>
+    <ul id="taskList">
+      {{#each tasks}}
+         <li data-id="{{this.id}}" data-severity="{{this.severity}}" style="background-color: {{severityColor this.severity}};">
+            {{this.task}}
+            {{#if this.completed}}
+              <span class="completed-label">(Completed)</span>
+            {{else}}
+              <button class="complete-btn" onclick="completeTask({{this.id}})">Complete</button>
+            {{/if}}
+         </li>
+      {{/each}}
+    </ul>
+    <!-- Wrap the add task area in a form-container for improved styling -->
+    <div class="form-container">
+      <h3>Add New Task</h3>
+      <input type="text" id="newTask" placeholder="Enter your task">
+      <select id="taskSeverity">
+        <option value="1">Importance 1</option>
+        <option value="2">Importance 2</option>
+        <option value="3">Importance 3</option>
+        <option value="4">Importance 4</option>
+        <option value="5">Importance 5</option>
+      </select>
+      <button id="addTaskButton">Add Task</button>
+    </div>
+  </div>
+  <script src="/script.js"></script>
+</body>
+</html>

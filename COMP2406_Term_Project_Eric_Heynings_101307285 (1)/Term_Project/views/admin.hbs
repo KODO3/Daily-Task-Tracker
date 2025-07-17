@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{title}}</title>
+  <!-- load Poppins font -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/template.css">
+</head>
+<body>
+  <div class="header">Daily Task Tracker</div>
+  <div class="navbar">
+      <a href="/landing">Home</a>
+      <a href="/login">Login</a>
+      <a href="/register">Register</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/admin">Admin</a>
+  </div>
+  <div class="content">
+    <h2>Admin Dashboard</h2>
+    <h3>All User Tasks</h3>
+    <table>
+       <thead>
+         <tr>
+           <th>Task ID</th>
+           <th>User</th>
+           <th>Task</th>
+           <th>Severity</th>
+           <th>Completed</th>
+         </tr>
+       </thead>
+       <tbody>
+         {{#each tasks}}
+           <tr>
+             <td>{{this.id}}</td>
+             <td>{{this.userid}}</td>
+             <td>{{this.task}}</td>
+             <td>{{this.severity}}</td>
+             <td>{{#if this.completed}}Yes{{else}}No{{/if}}</td>
+           </tr>
+         {{/each}}
+       </tbody>
+    </table>
+    
+    <h3>User Points Summary</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Points</th>
+          <th>Goal Achieved</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each userPoints}}
+          <tr>
+            <td>{{this.userid}}</td>
+            <td>{{this.points}}</td>
+            <td>{{#if (gte this.points 15)}}Yes{{else}}No{{/if}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  <script src="/script.js"></script>
+</body>
+</html>
